@@ -4,6 +4,17 @@ import { Footer } from "@/components/Footer";
 
 import appCss from "../styles.css?url";
 
+const themeScript = `
+(() => {
+  try {
+    var root = document.documentElement;
+    root.classList.remove("dark");
+  } catch (e) {
+    // fallback
+  }
+})();
+`;
+
 function NotFoundComponent() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
@@ -29,10 +40,18 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "3Dthreeaxis — Precision 3D Sculptures & Custom CNC Gifts" },
-      { name: "description", content: "Premium 3-axis CNC sculptures, corporate gifts, and bespoke metalwork. Machined to 0.01mm. Interactive 3D product viewer." },
-      { property: "og:title", content: "3Dthreeaxis — Precision 3D Sculptures" },
-      { property: "og:description", content: "Premium CNC sculptures and corporate gifts. Explore in interactive 3D." },
+      { title: "3D THREE AXIS — Personalised 3D printing, crystals & lighted gifts" },
+      {
+        name: "description",
+        content:
+          "Custom figurines from photos, laser 3D crystals, lithophane moon lamps, LED illusion plaques, and illuminated shadow frames. Contact WhatsApp +91 9092237193 or 3aprintsolutions@gmail.com.",
+      },
+      { property: "og:title", content: "3D THREE AXIS — Personalised prints & crystals" },
+      {
+        property: "og:description",
+        content:
+          "Photos of real customised orders — quote by WhatsApp or email. No catalogue prices; every piece is personalised.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -45,8 +64,13 @@ export const Route = createRootRoute({
 
 function RootShell({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en" suppressHydrationWarning>
       <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: themeScript,
+          }}
+        />
         <HeadContent />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />

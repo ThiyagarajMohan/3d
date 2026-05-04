@@ -1,81 +1,168 @@
-export type Shape = "knot" | "sphere" | "cube" | "cone" | "torus" | "icosa";
+export type ProductCategory =
+  | "Figurines"
+  | "Crystal"
+  | "Lamps"
+  | "Shadow boxes"
+  | "Decor"
+  | "Keepsakes";
 
 export type Product = {
   id: string;
   name: string;
   tagline: string;
   description: string;
-  price: number;
-  category: "Gift" | "Corporate" | "Custom";
-  shape: Shape;
-  color: string;
+  category: ProductCategory;
+  /** One or more photo URLs — first is used on cards. Add extra paths (e.g. `/products/your-file-2.jpg`) for gallery angles. */
+  images: string[];
 };
 
 export const products: Product[] = [
   {
-    id: "nebula-knot",
-    name: "Nebula Knot",
-    tagline: "Hand-finished aluminum sculpture",
+    id: "holiday-reindeer-set",
+    name: "3D printed reindeer figurines",
+    tagline: "Festive tabletop decor · multi-colour ribbons",
     description:
-      "Precision-machined on our 3-axis CNC, the Nebula Knot blends mathematical elegance with a mirror-polished finish. A statement piece for desks and shelves.",
-    price: 149,
-    category: "Gift",
-    shape: "knot",
-    color: "#22d3ee",
+      "Sleek modern reindeer with bold antlers — shown in matte red, metallic gold, and silver with ribbon accents. Lovely seasonal desk or shelf display; great as corporate or family gifts when ordered in coordinated colours.",
+    category: "Decor",
+    images: ["/products/holiday-reindeer.png"],
   },
   {
-    id: "orbit-sphere",
-    name: "Orbit Sphere",
-    tagline: "Brushed brass paperweight",
+    id: "geometric-pine-forest",
+    name: "Low‑poly evergreen tree set",
+    tagline: "Faceted teal pines · multiple sizes",
     description:
-      "A perfectly balanced sphere, micro-machined to 0.01mm tolerance. Cool to the touch, weighty in the hand, unforgettable on a desk.",
-    price: 89,
-    category: "Corporate",
-    shape: "sphere",
-    color: "#fbbf24",
+      "Geometric teal trees with chunky brown bases — stack a mini forest on a console or gifting table. Matte PLA‑style finish and crisp facets show off clean 3D print detail.",
+    category: "Decor",
+    images: ["/products/geometric-pine-trees.png"],
   },
   {
-    id: "monolith-cube",
-    name: "Monolith",
-    tagline: "Anodized titanium block",
+    id: "wood-pla-sample-showcase",
+    name: "Wood‑tone PLA print & filament showcase",
+    tagline: "Matching spool + lattice vase demonstration",
     description:
-      "Six perfect faces, one continuous bead-blasted finish. Engrave your logo for a corporate gift that won't end up in a drawer.",
-    price: 119,
-    category: "Corporate",
-    shape: "cube",
-    color: "#a78bfa",
+      "Sand‑coloured filament on a branded spool alongside a lattice egg vase printed in the same material — ideal reference for weddings, gifting, or clients who want a warm wood‑grain look.",
+    category: "Figurines",
+    images: ["/products/wood-pla-showcase.png"],
   },
   {
-    id: "apex-cone",
-    name: "Apex",
-    tagline: "Spun copper accent",
+    id: "vintage-toy-cars-printed",
+    name: "3D printed vintage roadster trio",
+    tagline: "Red · black · blue classic shells",
     description:
-      "A single rising form, lathe-spun from solid copper and lacquered for a lifetime patina-free shine.",
-    price: 99,
-    category: "Gift",
-    shape: "cone",
-    color: "#fb7185",
+      "Three colourways of a retro jeep‑style body with chrome‑look grille, round lamps, and spoked tyres. Collector desk toy or kids’ stocking gift — finishes can be matched to your brand palette.",
+    category: "Figurines",
+    images: ["/products/vintage-toy-cars.png"],
   },
   {
-    id: "halo-torus",
-    name: "Halo",
-    tagline: "Stainless steel ring",
+    id: "branching-tree-wall-sculpture",
+    name: "Branching coral tree sculpture",
+    tagline: "Grey organic canopy on white oval base",
     description:
-      "A continuous loop, polished to a chrome-like finish. The geometry of infinity, sized for your hand.",
-    price: 129,
-    category: "Custom",
-    shape: "torus",
-    color: "#34d399",
+      'Large organic branching form with dimension callouts in‑frame (~9.5" wide). Minimal desk sculpture for offices and reception desks; ask us about scale variants and engraving on the base.',
+    category: "Decor",
+    images: ["/products/branching-tree-sculpture.png"],
   },
   {
-    id: "icosa-prism",
-    name: "Prism 20",
-    tagline: "Faceted aluminum desk piece",
+    id: "personalised-key-chain",
+    name: "Personalised key chain",
+    tagline: "Name keepsake · gift-ready design",
     description:
-      "Twenty triangles, one mesmerizing object. Each facet catches light differently — a kinetic sculpture without moving parts.",
-    price: 109,
-    category: "Custom",
-    shape: "icosa",
-    color: "#22d3ee",
+      "Custom keepsake key chain made from your chosen name or initials. Perfect for gifting, event favors, and everyday carry—ready to personalize with fonts or accents.",
+    category: "Keepsakes",
+    images: ["/products/custom-nameplates.png"],
+  },
+  {
+    id: "white-fractal-tree-decor",
+    name: "Matte white fractal tree ornament",
+    tagline: "Airy branching canopy · tiered base",
+    description:
+      "Fine interlocking limbs on a square stepped base — airy coral silhouette that reads cleanly on timber or acrylic plinths. Perfect luxe gifting with neutral interiors.",
+    category: "Decor",
+    images: ["/products/white-fractal-tree-sculpture.png"],
+  },
+  {
+    id: "cube-lithophane-table-lamp",
+    name: "Cube lithophane table lamp",
+    tagline: "Black frame · warm backlight · geometric top grille",
+    description:
+      "Translucent lithophane panels wrap a matte black skeleton with decorative top vent slots. Displays a tonal couple portrait when lit — customise with YOUR photo plus optional short message.",
+    category: "Lamps",
+    images: ["/products/cube-lithophane-table-lamp.png"],
+  },
+  {
+    id: "plug-in-lithophane-night-light",
+    name: "Plug‑in moon lithophane night light",
+    tagline: "Wall‑socket ready · crater texture",
+    description:
+      "Compact disc lithophane on a mains plug adapter — warm backlight brings out embossed couple silhouette. Convenient for corridors and bedrooms without cable clutter.",
+    category: "Lamps",
+    images: ["/products/plug-in-lithophane-night-light.png"],
+  },
+  {
+    id: "custom-3d-miniature",
+    name: "Custom 3D printed miniature figurine",
+    tagline: "Your photo becomes a collectible statuette",
+    description:
+      "Turn a portrait into a hand‑sized customised statue. Layer lines showcase authentic 3D printing; finish is refined for gifting. Ideal for birthdays, farewells, and keepsakes.",
+    category: "Figurines",
+    images: ["/products/custom-miniature.png"],
+  },
+  {
+    id: "3d-wedding-crystal",
+    name: "3D laser‑engraved wedding crystal",
+    tagline: "Couple portraits inside optical crystal",
+    description:
+      "High‑definition laser etching freezes your wedding portraits in 3D inside premium clear crystal — with personalised script such as vows or greetings. Ships with a polished wooden presentation base.",
+    category: "Crystal",
+    images: ["/products/wedding-crystal.png"],
+  },
+  {
+    id: "moon-lithophane-lamp",
+    name: "Personalised Moon lithophane lamp",
+    tagline: "Photo moon lamp with lunar texture",
+    description:
+      "Spherical lithophane: varying wall thickness reveals your favourite photo when the warm LED shines through. Lunar‑style surface detailing and a minimalist wooden base complete the bedside look.",
+    category: "Lamps",
+    images: ["/products/moon-lithophane-lamp.png"],
+  },
+  {
+    id: "led-illusion-lamp",
+    name: "Custom 3D LED illusion lamp",
+    tagline: "Edge‑lit acrylic name & occasion art",
+    description:
+      "Laser‑etched clear acrylic on a slim LED base — vivid cyan glow, names, dates, and motifs like hearts and roses. Perfect for birthdays, anniversaries, and surprise desk gifts.",
+    category: "Lamps",
+    images: ["/products/led-illusion-lamp.png"],
+  },
+  {
+    id: "photo-crystal-couple",
+    name: "3D photo crystal — forever together",
+    tagline: "Illuminated block with couple etching",
+    description:
+      "Rectangular optical crystal with a bright base light that makes the internal 3D engraving pop. Custom couple imagery plus message (e.g. anniversary text) in elegant script.",
+    category: "Crystal",
+    images: ["/products/photo-crystal-couple.png"],
+  },
+  {
+    id: "heart-lithophane-lamp",
+    name: "Heart lithophane moon lamp",
+    tagline: "Heart‑shaped photo lamp",
+    description:
+      "Heart form with moon‑like texture and a lithophane of your photo on the front. Soft internal lighting — romantic option for Valentine’s, proposals, and anniversaries.",
+    category: "Lamps",
+    images: ["/products/heart-lithophane-lamp.png"],
+  },
+  {
+    id: "illuminated-shadow-box",
+    name: "Illuminated 3D shadow box frame",
+    tagline: "Layered diorama from your memory",
+    description:
+      "Backlit multi‑layer scene inside a deep frame — depth, colour, and tiny details recreated from your reference. A statement wall piece for homes and gifting.",
+    category: "Shadow boxes",
+    images: ["/products/illuminated-shadow-box.png"],
   },
 ];
+
+export function coverImage(p: Product): string {
+  return p.images[0] ?? "";
+}

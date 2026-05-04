@@ -1,16 +1,36 @@
 import { createFileRoute, Outlet, useMatches } from "@tanstack/react-router";
 import { useState } from "react";
+
 import { ProductCard } from "@/components/ProductCard";
+import type { ProductCategory } from "@/lib/products";
 import { products } from "@/lib/products";
+
+const categories = [
+  "All",
+  "Decor",
+  "Figurines",
+  "Keepsakes",
+  "Crystal",
+  "Lamps",
+  "Shadow boxes",
+] as const;
 
 export const Route = createFileRoute("/products")({
   component: ProductsLayout,
   head: () => ({
     meta: [
-      { title: "Products — 3Dthreeaxis" },
-      { name: "description", content: "Browse precision 3-axis CNC sculptures and corporate gifts. Each piece interactive in 3D." },
-      { property: "og:title", content: "Products — 3Dthreeaxis" },
-      { property: "og:description", content: "Browse precision CNC sculptures and corporate gifts." },
+      { title: "Products — 3D Three Axis Print Solutions" },
+      {
+        name: "description",
+        content:
+          "Custom 3D printed figurines, laser crystal keepsakes, lithophane moon lamps, LED gifts, and illuminated shadow boxes — personalised from your photos.",
+      },
+      { property: "og:title", content: "Products — 3D Three Axis Print Solutions" },
+      {
+        property: "og:description",
+        content:
+          "Personalised 3D printing, laser crystals, and illuminated gifts. Browse photos of real orders.",
+      },
     ],
   }),
 });
@@ -22,31 +42,29 @@ function ProductsLayout() {
   return <ProductsIndex />;
 }
 
-const categories = ["All", "Gift", "Corporate", "Custom"] as const;
-
 function ProductsIndex() {
   const [cat, setCat] = useState<(typeof categories)[number]>("All");
-  const [maxPrice, setMaxPrice] = useState(200);
 
-  const filtered = products.filter(
-    (p) => (cat === "All" || p.category === cat) && p.price <= maxPrice,
-  );
+  const filtered = products.filter((p) => cat === "All" || p.category === (cat as ProductCategory));
 
   return (
-    <div className="mx-auto max-w-6xl px-6 py-12">
-      <div className="mb-10">
-        <h1 className="font-display text-4xl font-bold md:text-5xl">All products</h1>
-        <p className="mt-2 text-muted-foreground">{filtered.length} pieces, machined to order.</p>
+    <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-12">
+      <div className="mb-8 sm:mb-10">
+        <h1 className="font-display text-3xl font-bold sm:text-4xl md:text-5xl">Our products</h1>
+        <p className="mt-2 max-w-2xl text-sm text-muted-foreground sm:text-base">
+          Showroom shots on every card — decor, lithophanes, crystals, filament samples, name gifts,
+          toys, and more. Ask on WhatsApp or email for custom colours and batch pricing.
+        </p>
       </div>
 
-      {/* Filters */}
-      <div className="mb-10 flex flex-col gap-4 rounded-2xl glass p-5 md:flex-row md:items-center md:justify-between">
+      <div className="mb-8 flex flex-col gap-4 rounded-2xl glass p-4 sm:mb-10 sm:flex-row sm:items-center sm:justify-between sm:p-5">
         <div className="flex flex-wrap gap-2">
           {categories.map((c) => (
             <button
               key={c}
+              type="button"
               onClick={() => setCat(c)}
-              className={`rounded-full px-4 py-1.5 text-sm transition-colors ${
+              className={`rounded-full px-3 py-1.5 text-xs transition-colors sm:px-4 sm:text-sm ${
                 cat === c
                   ? "bg-primary text-primary-foreground"
                   : "border border-border text-muted-foreground hover:text-foreground"
@@ -56,20 +74,12 @@ function ProductsIndex() {
             </button>
           ))}
         </div>
-        <label className="flex items-center gap-3 text-sm text-muted-foreground">
-          Max price: <span className="font-display text-foreground">${maxPrice}</span>
-          <input
-            type="range"
-            min={50}
-            max={200}
-            value={maxPrice}
-            onChange={(e) => setMaxPrice(Number(e.target.value))}
-            className="accent-[var(--color-primary)]"
-          />
-        </label>
+        <p className="text-xs text-muted-foreground sm:text-sm">
+          Showing <span className="font-display text-foreground">{filtered.length}</span> designs
+        </p>
       </div>
 
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
         {filtered.map((p, i) => (
           <ProductCard key={p.id} product={p} index={i} />
         ))}

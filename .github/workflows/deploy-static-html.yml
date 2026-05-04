@@ -1,0 +1,22 @@
+name: Deploy static HTML
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Deploy docs folder to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          folder: docs
+          clean: true
+          commit_message: "Deploy static HTML to GitHub Pages"
+          token: ${{ secrets.GITHUB_TOKEN }}
